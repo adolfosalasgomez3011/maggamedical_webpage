@@ -235,72 +235,98 @@
     #consulta .section-label { color: var(--peach-light); }
     #consulta .section-title { color: #fff; }
     #consulta .section-title em { color: var(--teal-light); }
-    .how-header { text-align: center; margin-bottom: 56px; }
-    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; position: relative; }
-    .steps-grid::before {
-      content: ''; position: absolute; top: 32px; left: 80px; right: 80px; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-    }
-    .step-card { text-align: center; padding: 28px 18px; }
-    .step-num {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 1.5rem; font-weight: 500;
-      color: var(--peach-light); margin: 0 auto 20px;
-    }
-    .step-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: #fff; margin-bottom: 10px; }
-    .step-card p { font-size: 0.83rem; color: rgba(255,255,255,0.68); line-height: 1.75; }
+    .how-header { text-align: center; margin-bottom: 64px; }
+    .how-header .section-label { margin-bottom: 12px; }
 
-    /* ── JOURNEY INFOGRAPHIC ─────────────────────── */
-    .journey-flow-bar {
-      display: flex; align-items: flex-start; justify-content: center;
-      gap: 0; margin: 0 auto 36px; padding: 20px 0; max-width: 760px;
+    /* ── JOURNEY STEPS ─────────────────────────── */
+    .journey-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 18px; position: relative; margin-bottom: 52px; z-index: 1;
     }
-    .jfb-node { display: flex; flex-direction: column; align-items: center; flex: 1; }
-    .jfb-dot {
-      width: 48px; height: 48px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.07);
+    .journey-steps::before {
+      content: ''; position: absolute;
+      top: 55px; left: calc(12.5% + 10px); right: calc(12.5% + 10px); height: 2px;
+      background: linear-gradient(90deg, rgba(59,192,192,0.55), rgba(168,223,223,0.5) 33%, rgba(184,156,200,0.5) 66%, rgba(232,144,106,0.45));
+      z-index: 0;
+    }
+    .jstep { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+    .jstep-bubble {
+      width: 110px; height: 110px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin-bottom: 20px; position: relative; flex-shrink: 0; transition: var(--transition);
+    }
+    .jstep:hover .jstep-bubble { transform: scale(1.1) translateY(-5px); }
+    .jstep-bubble::before {
+      content: ''; position: absolute; inset: -3px; border-radius: 50%; z-index: -1; opacity: 0.65; transition: var(--transition);
+    }
+    .jstep:hover .jstep-bubble::before { opacity: 1; }
+    .jstep-1 .jstep-bubble { background: rgba(59,192,192,0.14); border: 2px solid rgba(59,192,192,0.4); }
+    .jstep-1 .jstep-bubble::before { background: conic-gradient(#3BC0C0, #A8DFDF, #3BC0C0); }
+    .jstep-2 .jstep-bubble { background: rgba(168,223,223,0.12); border: 2px solid rgba(168,223,223,0.35); }
+    .jstep-2 .jstep-bubble::before { background: conic-gradient(#A8DFDF, #5DBCBC, #A8DFDF); }
+    .jstep-3 .jstep-bubble { background: rgba(184,156,200,0.14); border: 2px solid rgba(184,156,200,0.4); }
+    .jstep-3 .jstep-bubble::before { background: conic-gradient(#B89CC8, #D8C0EC, #B89CC8); }
+    .jstep-4 .jstep-bubble { background: rgba(232,144,106,0.14); border: 2px solid rgba(232,144,106,0.4); }
+    .jstep-4 .jstep-bubble::before { background: conic-gradient(#E8906A, #F5C4A8, #E8906A); }
+    .jstep-num { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: rgba(255,255,255,0.92); line-height: 1; }
+    .jstep-icon { font-size: 1.4rem; margin-top: 3px; }
+    .jstep-card {
+      background: rgba(255,255,255,0.055); border-radius: 20px; padding: 26px 18px;
+      width: 100%; text-align: center; border: 1px solid rgba(255,255,255,0.09);
+      backdrop-filter: blur(10px); transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .jstep:hover .jstep-card {
+      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.18);
+      transform: translateY(-5px); box-shadow: 0 24px 56px rgba(0,0,0,0.28);
+    }
+    .jstep-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .jstep-1 .jstep-card::before { background: linear-gradient(90deg, #3BC0C0, #A8DFDF); }
+    .jstep-2 .jstep-card::before { background: linear-gradient(90deg, #A8DFDF, #6DC4C4); }
+    .jstep-3 .jstep-card::before { background: linear-gradient(90deg, #B89CC8, #D8C0EC); }
+    .jstep-4 .jstep-card::before { background: linear-gradient(90deg, #E8906A, #F5C4A8); }
+    .jstep-watermark {
+      position: absolute; bottom: -14px; right: 6px;
+      font-family: var(--font-display); font-size: 6rem; font-weight: 700;
+      color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; user-select: none;
+    }
+    .jstep-tag {
+      display: inline-block; font-size: 0.61rem; font-weight: 700;
+      letter-spacing: 0.11em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .jstep-1 .jstep-tag { background: rgba(59,192,192,0.2); color: #80DDDD; border: 1px solid rgba(59,192,192,0.3); }
+    .jstep-2 .jstep-tag { background: rgba(168,223,223,0.15); color: #B8ECEC; border: 1px solid rgba(168,223,223,0.25); }
+    .jstep-3 .jstep-tag { background: rgba(184,156,200,0.2); color: #D4B8EC; border: 1px solid rgba(184,156,200,0.3); }
+    .jstep-4 .jstep-tag { background: rgba(232,144,106,0.2); color: var(--peach-light); border: 1px solid rgba(232,144,106,0.3); }
+    .jstep-card h3 { font-family: var(--font-display); font-size: 1.18rem; font-weight: 500; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+    .jstep-card p { font-size: 0.8rem; color: rgba(255,255,255,0.58); line-height: 1.78; }
+
+    /* Ruta Digital panel */
+    .journey-digital-panel {
+      margin: 0 auto; max-width: 860px; position: relative; z-index: 1;
+      background: linear-gradient(135deg, rgba(184,156,200,0.1) 0%, rgba(100,60,130,0.07) 100%);
+      border: 1.5px solid rgba(184,156,200,0.32); border-radius: 24px;
+      padding: 32px 40px; display: grid;
+      grid-template-columns: auto 1fr; gap: 32px; align-items: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    }
+    .jdp-icon-wrap {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(184,156,200,0.16); border: 1.5px solid rgba(184,156,200,0.35);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 1rem; font-weight: 600;
-      color: var(--peach-light); z-index: 2; position: relative;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .jfb-label {
-      margin-top: 10px; font-size: 0.68rem; color: rgba(255,255,255,0.55);
-      text-align: center; line-height: 1.4; font-weight: 500; padding: 0 4px;
+    .jdp-badge {
+      display: inline-block; background: rgba(184,156,200,0.2);
+      color: rgba(220,200,240,0.92); font-size: 0.63rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px; text-transform: uppercase;
+      letter-spacing: 0.1em; border: 1px solid rgba(184,156,200,0.3); margin-bottom: 10px;
     }
-    .jfb-arrow {
-      flex: 1; position: relative; top: 24px; height: 1px;
-      background: rgba(255,255,255,0.18); min-width: 20px;
-    }
-    .jfb-arrow::after {
-      content: ''; position: absolute; right: -1px; top: -3px;
-      width: 6px; height: 6px;
-      border-top: 1.5px solid rgba(255,255,255,0.28);
-      border-right: 1.5px solid rgba(255,255,255,0.28);
-      transform: rotate(45deg);
-    }
-    .jfb-fork-node { position: relative; }
-    .jfb-fork-node::after {
-      content: ''; position: absolute; left: calc(50% - 1px); top: 52px;
-      width: 1px; height: 28px; border-left: 1.5px dashed rgba(184,156,200,0.45);
-    }
-    .journey-branch-box {
-      max-width: 600px; margin: 0 auto 52px;
-      border: 1.5px dashed rgba(184,156,200,0.38);
-      border-radius: 16px; padding: 18px 24px;
-      background: rgba(184,156,200,0.05);
-      display: flex; gap: 16px; align-items: flex-start;
-    }
-    .jbb-badge {
-      flex-shrink: 0; align-self: center;
-      background: rgba(184,156,200,0.2); color: rgba(230,210,245,0.9);
-      font-size: 0.69rem; font-weight: 700; padding: 5px 12px;
-      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
-      white-space: nowrap; border: 1px solid rgba(184,156,200,0.25);
-    }
-    .journey-branch-box p { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.75; margin: 0; }
-    .journey-branch-box strong { color: rgba(255,255,255,0.72); font-weight: 600; }
+    .jdp-text p { font-size: 0.84rem; color: rgba(255,255,255,0.6); line-height: 1.82; margin: 0; }
+    .jdp-text strong { color: rgba(255,255,255,0.88); font-weight: 600; }
 
     /* ── CONDITIONS ──────────────────────────────── */
     #condiciones { padding: 96px 0; background: var(--off-white); }
@@ -469,9 +495,9 @@
       .hero-grid, .about-grid, .contact-grid, .approach-header, .conditions-layout { grid-template-columns: 1fr; }
       .hero-visual { display: none; }
       .pillars-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: 1fr 1fr; }
-      .steps-grid::before { display: none; }
-      .jfb-label { font-size: 0.6rem; }
+      .journey-steps { grid-template-columns: 1fr 1fr; }
+      .journey-steps::before { display: none; }
+      .jstep-bubble { width: 88px; height: 88px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
@@ -480,10 +506,10 @@
     }
     @media (max-width: 520px) {
       .container { padding: 0 20px; }
-      .steps-grid { grid-template-columns: 1fr; }
+      .journey-steps { grid-template-columns: 1fr; }
       .hero-stats { gap: 24px; }
-      .journey-flow-bar { display: none; }
-      .journey-branch-box { flex-direction: column; gap: 10px; }
+      .journey-digital-panel { grid-template-columns: 1fr; text-align: center; padding: 24px 22px; }
+      .jdp-icon-wrap { margin: 0 auto; }
     }
   </style>
 </head>
@@ -669,53 +695,67 @@
       <p class="section-label" data-i18n="how.label">Cómo es una consulta</p>
       <h2 class="section-title" data-i18n-html="how.title">Un proceso <em>profundo</em><br>y ordenado</h2>
     </div>
-    <!-- Journey infographic flow bar -->
-    <div class="journey-flow-bar fade-in" style="transition-delay:0.06s;">
-      <div class="jfb-node">
-        <div class="jfb-dot">01</div>
-        <div class="jfb-label" data-i18n-html="jfb.l1">Historia<br>Clínica</div>
+
+    <div class="journey-steps">
+      <div class="jstep jstep-1 fade-in">
+        <div class="jstep-bubble">
+          <div class="jstep-num">01</div>
+          <div class="jstep-icon">📋</div>
+        </div>
+        <div class="jstep-card">
+          <div class="jstep-watermark">01</div>
+          <div class="jstep-tag" data-i18n-html="jfb.l1">Historia<br>Clínica</div>
+          <h3 data-i18n="s1.title">Historia clínica contextual</h3>
+          <p data-i18n="s1.desc">Exploramos tu historia completa: síntomas, emociones, contexto de vida y los eventos que rodearon el inicio de la condición. Tu relato importa tanto como tus exámenes.</p>
+        </div>
       </div>
-      <div class="jfb-arrow"></div>
-      <div class="jfb-node jfb-fork-node">
-        <div class="jfb-dot">02</div>
-        <div class="jfb-label" data-i18n-html="jfb.l2">Elección<br>del Camino</div>
+
+      <div class="jstep jstep-2 fade-in" style="transition-delay:0.09s">
+        <div class="jstep-bubble">
+          <div class="jstep-num">02</div>
+          <div class="jstep-icon">🧭</div>
+        </div>
+        <div class="jstep-card">
+          <div class="jstep-watermark">02</div>
+          <div class="jstep-tag" data-i18n-html="jfb.l2">Elección<br>del Camino</div>
+          <h3 data-i18n="s2.title">Elección del camino</h3>
+          <p data-i18n="s2.desc">Con la información obtenida, elegimos el enfoque terapéutico más adecuado, el número de sesiones y si se requieren exámenes complementarios o interconsultas con especialistas.</p>
+        </div>
       </div>
-      <div class="jfb-arrow"></div>
-      <div class="jfb-node">
-        <div class="jfb-dot">03</div>
-        <div class="jfb-label" data-i18n-html="jfb.l3">Primera<br>Intervención</div>
+
+      <div class="jstep jstep-3 fade-in" style="transition-delay:0.18s">
+        <div class="jstep-bubble">
+          <div class="jstep-num">03</div>
+          <div class="jstep-icon">✨</div>
+        </div>
+        <div class="jstep-card">
+          <div class="jstep-watermark">03</div>
+          <div class="jstep-tag" data-i18n-html="jfb.l3">Primera<br>Intervención</div>
+          <h3 data-i18n="s3.title">Primera intervención</h3>
+          <p data-i18n="s3.desc">En la primera consulta ya realizamos una intervención terapéutica activa. No es solo una evaluación — empezamos a trabajar desde el primer encuentro.</p>
+        </div>
       </div>
-      <div class="jfb-arrow"></div>
-      <div class="jfb-node">
-        <div class="jfb-dot">04</div>
-        <div class="jfb-label" data-i18n-html="jfb.l4">Acompañamiento<br>Continuo</div>
+
+      <div class="jstep jstep-4 fade-in" style="transition-delay:0.27s">
+        <div class="jstep-bubble">
+          <div class="jstep-num">04</div>
+          <div class="jstep-icon">🌿</div>
+        </div>
+        <div class="jstep-card">
+          <div class="jstep-watermark">04</div>
+          <div class="jstep-tag" data-i18n-html="jfb.l4">Acompañamiento<br>Continuo</div>
+          <h3 data-i18n="s4.title">Acompañamiento continuo</h3>
+          <p data-i18n="s4.desc">La sanación es un proceso. Sesiones de seguimiento ajustadas a tu evolución — con monitoreo biométrico digital si lo elegiste, o en formato clásico según tu caso.</p>
+        </div>
       </div>
     </div>
-    <!-- Optional digital path callout -->
-    <div class="journey-branch-box fade-in" style="transition-delay:0.14s;">
-      <div class="jbb-badge">📡 Ruta Digital Opcional</div>
-      <p data-i18n-html="jbb.desc"><strong>Para quienes desean monitoreo continuo:</strong> Mediante sensores biométricos, generamos un dashboard personalizado por caso — permite comparar el antes y el después de cada etapa. No todos los pacientes requieren o desean este camino; es una herramienta adicional, no un requisito.</p>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card fade-in">
-        <div class="step-num">01</div>
-        <h3 data-i18n="s1.title">Historia clínica contextual</h3>
-        <p data-i18n="s1.desc">Exploramos tu historia completa: síntomas, emociones, contexto de vida y los eventos que rodearon el inicio de la condición. Tu relato importa tanto como tus exámenes.</p>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-num">02</div>
-        <h3 data-i18n="s2.title">Elección del camino</h3>
-        <p data-i18n="s2.desc">Con la información obtenida, elegimos el enfoque terapéutico más adecuado, el número de sesiones y si se requieren exámenes complementarios o interconsultas con especialistas.</p>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-num">03</div>
-        <h3 data-i18n="s3.title">Primera intervención</h3>
-        <p data-i18n="s3.desc">En la primera consulta ya realizamos una intervención terapéutica activa. No es solo una evaluación — empezamos a trabajar desde el primer encuentro.</p>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-num">04</div>
-        <h3 data-i18n="s4.title">Acompañamiento continuo</h3>
-        <p data-i18n="s4.desc">La sanación es un proceso. Sesiones de seguimiento ajustadas a tu evolución — con monitoreo biométrico digital si lo elegiste, o en formato clásico según tu caso.</p>
+
+    <!-- Ruta Digital panel -->
+    <div class="journey-digital-panel fade-in" style="transition-delay:0.36s">
+      <div class="jdp-icon-wrap">📡</div>
+      <div class="jdp-text">
+        <div class="jdp-badge">Ruta Digital Opcional</div>
+        <p data-i18n-html="jbb.desc"><strong>Para quienes desean monitoreo continuo:</strong> Mediante sensores biométricos, generamos un dashboard personalizado por caso — permite comparar el antes y el después de cada etapa. No todos los pacientes requieren o desean este camino; es una herramienta adicional, no un requisito.</p>
       </div>
     </div>
   </div>
